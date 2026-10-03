@@ -17,6 +17,9 @@ if [ "$LOCAL" = "$REMOTO" ]; then
 elif git merge-base --is-ancestor HEAD origin/main; then
   echo "↓ GitHub tem novidades — avançando (fast-forward)…"
   git merge --ff-only origin/main && echo "✓ atualizado com o que você subiu"
+elif git merge-base --is-ancestor origin/main HEAD; then
+  echo "↑ workspace À FRENTE do GitHub por $(git rev-list --count origin/main..HEAD) commit(s) —"
+  echo "  nada a pular; o próximo push (via zip) leva isso pro repo."
 else
   echo "↕ histórios divergiram — rebase dos commits locais em cima do GitHub…"
   git rebase origin/main && echo "✓ sincronizado (rebase)" || { echo "✗ CONFLITO — resolver manualmente"; exit 1; }
