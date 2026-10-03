@@ -12,6 +12,7 @@ mapas-musicais/
 ├── ferramentas/ .................. utilitários genéricos (não pertencem a uma música só)
 │   ├── midi_parse.py ............. dissect de MIDIs (pistas, notas, compassos)
 │   ├── vocal_dump.py ............. dump da pista vocal
+│   ├── sincroniza.sh ............. puxa o que o usuário subiu no GitHub (repõe o remote sozinho)
 │   └── regenera-tudo.sh .......... roda as 8 fábricas e confere (de qualquer lugar)
 ├── 01-november-rain/
 │   ├── trabalho/ ................. gera_mapa.py · gera_docx.py · novemberrain.mid
@@ -41,18 +42,23 @@ mapas-musicais/
 
 ## 🐙 GITHUB (plano de migração e compartilhamento)
 
-- Repositório: **`https://github.com/USUARIO/mapas-musicais` (preencher ao criar)** — inicializar
-  SEM README/licença/gitignore (já temos os nossos).
-- **Upload do usuário** (arquivos que o chat não aceita — MIDI, PDF etc.): subir no repo → avisar
-  o caminho no chat → o agente baixa com `curl` (rede do sandbox verificada ✓ — github.com 200).
-  ⚠ Para esse fluxo funcionar **sem autenticação**, o repo (ou um repo-portal separado) precisa
-  ser **público**; repos privados exigem token no raw URL — e **token NUNCA se cola no chat**.
-- O `.git` local sobrevive entre sessões do workspace, **menos o `.git/config`** (regra da
-  plataforma). Se `git remote -v` vier vazio numa sessão nova:
-  `git remote add origin <URL> && git push`.
+- Repositório: **https://github.com/institutocura-maker/midi2cifra** (público ✓).
+  Acesso verificado do sandbox em 03/10/2026: `git ls-remote` ✓ · API ✓ · raw ✓ ·
+  `bash ferramentas/sincroniza.sh` ✓ ("workspace e GitHub em sincronia"). O commit `0862327`
+  (a estrutura hierárquica inteira) está lá — o zip exportado carregou o `.git` junto.
+- **O LOOP DE SINCRONIA** (o `.git` local perde só o `.git/config` entre sessões da plataforma —
+  o `sincroniza.sh` repõe o remote sozinho, sempre rodar por ele):
+  1. **Você → eu:** subir o arquivo no GitHub (web UI ou push — MIDI, PDF, o que o chat não
+     aceita) e avisar no chat → eu rodo `bash ferramentas/sincroniza.sh` e puxo tudo.
+  2. **Eu → você:** eu commito aqui e regenero o `mapas-musicais.zip` (contém o `.git` com
+     todos os commits). Pra espelhar minhas mudanças no GitHub: baixar o zip, descompactar e,
+     dentro da pasta, `git pull origin main` (incorpora o que você tiver subido lá) e
+     `git push origin main`. Mudanças pequenas também dá pra fazer direto na web do GitHub.
+  ⚠ **Token NUNCA no chat** — por design eu só PUXO (repo público não pede senha); o push é
+  sempre do lado de você.
 - **Migração de contexto** (quando a janela desta conversa encher): abrir conversa nova e apontar
-  o agente para o `LEIA-ME.md` — ele contém o mapa completo do projeto. O GitHub é o seguro
-  extra: duplicata fora da plataforma + histórico de versões + canal de arquivos.
+  o agente para o `LEIA-ME.md` (e/ou clonar o repo) — o mapa completo do projeto está aqui. O
+  GitHub é o seguro extra: duplicata fora da plataforma + histórico de versões + canal de arquivos.
 
 ## 🌹 Bed of Roses — Bon Jovi · versão Matthias Nebel (The Voice of Germany 2018) — PROVA DE CONCEITO Nº 3 · COMPLETA (CHAT + HTML + DOCX)
 
