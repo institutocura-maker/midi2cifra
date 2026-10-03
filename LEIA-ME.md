@@ -9,10 +9,11 @@ mapas-musicais/
 ├── LEIA-ME.md .................... este índice (o mapa do mapa)
 ├── README.md ..................... capa do repositório GitHub
 ├── .gitignore · mapas-musicais.zip (export p/ download — gitignored)
+├── upload/ ....................... CAIXA DE ENTRADA do usuário (o README de lá explica) — inbox zero
 ├── ferramentas/ .................. utilitários genéricos (não pertencem a uma música só)
 │   ├── midi_parse.py ............. dissect de MIDIs (pistas, notas, compassos)
 │   ├── vocal_dump.py ............. dump da pista vocal
-│   ├── sincroniza.sh ............. puxa o que o usuário subiu no GitHub (repõe o remote sozinho)
+│   ├── sincroniza.sh ............. puxa o que o usuário subiu; com a deploy key, EMPURRA também
 │   └── regenera-tudo.sh .......... roda as 8 fábricas e confere (de qualquer lugar)
 ├── 01-november-rain/
 │   ├── trabalho/ ................. gera_mapa.py · gera_docx.py · novemberrain.mid
@@ -40,22 +41,23 @@ mapas-musicais/
 - Verificação pós-mudança (03/10/2026): 8/8 fábricas ✓ · 5/5 HTMLs byte a byte idênticos aos
   anteriores · DOCXs com auto-checagem de estrutura ✓.
 
-## 🐙 GITHUB (plano de migração e compartilhamento)
+## 🐙 GITHUB — https://github.com/institutocura-maker/midi2cifra (público ✓)
 
-- Repositório: **https://github.com/institutocura-maker/midi2cifra** (público ✓).
-  Acesso verificado do sandbox em 03/10/2026: `git ls-remote` ✓ · API ✓ · raw ✓ ·
-  `bash ferramentas/sincroniza.sh` ✓ ("workspace e GitHub em sincronia"). O commit `0862327`
-  (a estrutura hierárquica inteira) está lá — o zip exportado carregou o `.git` junto.
-- **O LOOP DE SINCRONIA** (o `.git` local perde só o `.git/config` entre sessões da plataforma —
-  o `sincroniza.sh` repõe o remote sozinho, sempre rodar por ele):
-  1. **Você → eu:** subir o arquivo no GitHub (web UI ou push — MIDI, PDF, o que o chat não
-     aceita) e avisar no chat → eu rodo `bash ferramentas/sincroniza.sh` e puxo tudo.
-  2. **Eu → você:** eu commito aqui e regenero o `mapas-musicais.zip` (contém o `.git` com
-     todos os commits). Pra espelhar minhas mudanças no GitHub: baixar o zip, descompactar e,
-     dentro da pasta, `git pull origin main` (incorpora o que você tiver subido lá) e
-     `git push origin main`. Mudanças pequenas também dá pra fazer direto na web do GitHub.
-  ⚠ **Token NUNCA no chat** — por design eu só PUXO (repo público não pede senha); o push é
-  sempre do lado de você.
+- **A ponte é DUPla** (autorização do usuário em 03/10/2026):
+  - **Você → workspace:** suba arquivos em **`upload/`** (a caixa de entrada — o README de lá
+    explica; GitHub web: entrar na pasta → Add file → Upload files) e avise no chat. O agente
+    roda `bash ferramentas/sincroniza.sh`, baixa, processa e MOVE o arquivo pra casa dele
+    (`trabalho/` da música) — inbox zero, histórico no git.
+  - **Workspace → GitHub (PUSH):** via **deploy key SSH de escrita**. A chave PRIVADA nasce e
+    mora no sandbox (`~/.ssh/`, gitignored — nunca passa pelo chat); só a PÚBLICA foi registrada
+    no GitHub (Settings → Deploy keys → *Allow write access*). Escopo mínimo: escrever NESTE
+    repo, nada mais. Revogável a qualquer momento (GitHub → Settings → Deploy keys → Delete).
+    Rota: SSH pela porta 443 (`ssh.github.com` — testada ✓).
+  - `ferramentas/sincroniza.sh` faz o ciclo sozinho: repõe o remote (o `.git/config` não
+    sobrevive entre sessões), detecta se a deploy key está ativa, puxa o que você subiu e, se o
+    workspace estiver à frente, **empurra**. Sem a chave: só puxa (HTTPS) e o
+    `mapas-musicais.zip` segue como plano B (contém o `.git` inteiro).
+  - ⚠ **Nada de senhas/tokens no chat** — a arquitetura foi desenhada pra não precisar deles.
 - **Migração de contexto** (quando a janela desta conversa encher): abrir conversa nova e apontar
   o agente para o `LEIA-ME.md` (e/ou clonar o repo) — o mapa completo do projeto está aqui. O
   GitHub é o seguro extra: duplicata fora da plataforma + histórico de versões + canal de arquivos.
