@@ -54,9 +54,10 @@ mapas-musicais/
     repo, nada mais. Revogável a qualquer momento (GitHub → Settings → Deploy keys → Delete).
     Rota: SSH pela porta 443 (`ssh.github.com` — testada ✓).
   - `ferramentas/sincroniza.sh` faz o ciclo sozinho: repõe o remote (o `.git/config` não
-    sobrevive entre sessões), detecta se a deploy key está ativa, puxa o que você subiu e, se o
-    workspace estiver à frente, **empurra**. Sem a chave: só puxa (HTTPS) e o
-    `mapas-musicais.zip` segue como plano B (contém o `.git` inteiro).
+    sobrevive entre sessões), **auto-repara as permissões da chave** (a plataforma também não
+    preserva permissões de arquivo — regra: `chmod 600` antes de usar), detecta se a deploy key
+    está ativa, puxa o que você subiu e, se o workspace estiver à frente, **empurra**. Sem a
+    chave: só puxa (HTTPS) e o `mapas-musicais.zip` segue como plano B (contém o `.git` inteiro).
   - ⚠ **Nada de senhas/tokens no chat** — a arquitetura foi desenhada pra não precisar deles.
 - **Migração de contexto** (quando a janela desta conversa encher): abrir conversa nova e apontar
   o agente para o `LEIA-ME.md` (e/ou clonar o repo) — o mapa completo do projeto está aqui. O
