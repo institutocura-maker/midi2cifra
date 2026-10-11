@@ -12,6 +12,7 @@ mapas-musicais/
 ├── upload/ ....................... CAIXA DE ENTRADA do usuário (o README de lá explica) — inbox zero
 ├── ferramentas/ .................. utilitários genéricos (não pertencem a uma música só)
 │   ├── midi_parse.py ............. dissect de MIDIs (pistas, notas, compassos)
+│   ├── mscx_parse.py ............. dissect de partituras MuseScore (.mscz/.mscx)
 │   ├── vocal_dump.py ............. dump da pista vocal
 │   ├── sincroniza.sh ............. puxa o que o usuário subiu; com a deploy key, EMPURRA também
 │   └── regenera-tudo.sh .......... roda as 8 fábricas e confere (de qualquer lugar)
@@ -24,11 +25,14 @@ mapas-musicais/
 ├── 03-bed-of-roses/
 │   ├── trabalho/ ................. gera_bedofroses.py · gera_bedofroses_docx.py · bed-of-roses.mid
 │   └── saidas/ .................. mapa-musical-bed-of-roses.html · -fasustenido.html · .docx · teclado-bor.png
-└── 04-dont-stop-believin/
+├── 04-dont-stop-believin/
     ├── trabalho/ ................. gera_dsb.py · gera_dsb_docx.py · dont-stop-believin.mid ·
     │                             dsb-piano-solo-referencia.mid · cifra-usuario-dsb.txt ·
     │                             dsb-cama-e-transcricao.md · imagens-referencia/ (4 prévias — beco sem saída)
     └── saidas/ .................. mapa-musical-dont-stop-believin.html · .docx · teclado-dsb.png
+└── 05-river-flows-in-you/
+    ├── trabalho/ ................. river-flow-in-you.mscz (partitura MuseScore 4.40 — a fonte)
+    └── saidas/ .................. (a gerar: o mapa pedagógico HTML + DOCX)
 ```
 
 **Convenções:**
@@ -62,6 +66,42 @@ mapas-musicais/
 - **Migração de contexto** (quando a janela desta conversa encher): abrir conversa nova e apontar
   o agente para o `LEIA-ME.md` (e/ou clonar o repo) — o mapa completo do projeto está aqui. O
   GitHub é o seguro extra: duplicata fora da plataforma + histórico de versões + canal de arquivos.
+
+## 🌊 River Flows in You — Yiruma · PROVA DE CONCEITO Nº 5 (PEDAGÓGICA) · EM ANDAMENTO
+
+O primeiro mapa pra ALUNO: o filho mais novo do usuário quer aprender a peça — plano
+pedagógico completo, as duas mãos, do primeiro contato até a peça inteira. Mapa "mais amplo":
+além de nota-a-nota, camadas de ensino (dedos, dinâmica, fraseado, escada de andamento).
+
+**A fonte (espécie nova na série):** partitura MuseScore 4.40 subida pelo usuário em upload/
+(→ 05-river-flows-in-you/trabalho/river-flow-in-you.mscz) — NOTAÇÃO COMPLETA, não transcrição.
+Parser genérico novo: `ferramentas/mscx_parse.py` (relatório + dump compasso a compasso, as
+duas claves).
+
+**A partitura disseca­da (leitura de 11/10/2026 — 47 compassos por clave · 854 notas · 4/4):**
+- **Tom: LÁ MAIOR (3 sustenidos)** = o tom original da publicação oficial (Musicnotes
+  MN0073222, "Original Published Key: A Major") — tocar junto com a gravação do Yiruma funciona
+  direto. A partitura marca ♩=78; a edição oficial sugere q=65 (peça de andamento elástico).
+- **Forma: A1 · A2 · B · A3 · B′ · CODA** — A1 m1–4 · A2 m5–12 · B m13–21 · A3 m22–29 ·
+  B′ m30–38 · coda m39–47. Repetições literais: m1=m3=m39 · m2=m4 · m5=m9=m22 · m32≈m36.
+  m21 e m38 = as "respirações" (mínima E4/G#3 + pausa) que fecham as seções B.
+- **A harmonia é UM loop só: F#m → D → A → E** (vi–IV–I–V de Lá), a peça inteira. O "rio" da
+  mão esquerda = o loop quebrado em 4 células de colcheias: F#m=F#-C#-F# · D=D-A-E ·
+  A=A-E-C# · E=E-B-E(ou G#). Sem modulação nenhuma.
+- **O final FLUTUA:** termina no E (o dominante) — B4 sobre E4, semibreve inteira. A peça não
+  fecha na tônica: termina suspensa (a assinatura estética dela).
+- **Direita (clave de Sol, C#4–E6, 556 notas):** melodia + pedal interno (A4) tecidos — nas
+  seções A2/A3 em semicolcheias alternadas (melodia-pedal-melodia); nas seções B o rio passa
+  pra direita: semicolcheias contínuas com a melodia em cima + cascatas A5-B5-C#6-D6-E6 (m14/16)
+  — o teto E6.
+- **Esquerda (clave de Fá, E2–G#4, 298 notas):** arpejos em colcheias — as 4 células fixas,
+  formas de mão estáveis (a mão "não pensa", só troca de célula).
+- A partitura veio SEM dedilhados, dinâmicas ou articulações — o mapa pedagógico vai
+  acrescentar essas camadas (é aí que o "mais amplo" mora).
+
+**PRÓXIMO PASSO:** calibrar com o usuário (nível do aluno · leitura de partitura · objetivo ·
+rotina de estudo) → desenhar o PLANO PEDAGÓGICO por estágios → fábrica gera_river.py (fonte
+única = o .mscz parseado pelo mscx_parse) → mapa HTML + DOCX de estudo.
 
 ## 🌹 Bed of Roses — Bon Jovi · versão Matthias Nebel (The Voice of Germany 2018) — PROVA DE CONCEITO Nº 3 · COMPLETA (CHAT + HTML + DOCX)
 
