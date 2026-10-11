@@ -99,9 +99,35 @@ duas claves).
 - A partitura veio SEM dedilhados, dinâmicas ou articulações — o mapa pedagógico vai
   acrescentar essas camadas (é aí que o "mais amplo" mora).
 
-**PRÓXIMO PASSO:** calibrar com o usuário (nível do aluno · leitura de partitura · objetivo ·
-rotina de estudo) → desenhar o PLANO PEDAGÓGICO por estágios → fábrica gera_river.py (fonte
-única = o .mscz parseado pelo mscx_parse) → mapa HTML + DOCX de estudo.
+**CALIBRADO com o usuário (11/10/2026):** aluno iniciante (toca peças fáceis com as 2 mãos) ·
+**NÃO lê partitura** (aprende por imitação/ouvido — o mapa vira a partitura dele) · objetivo =
+**a versão integral** · rotina ~30 min/dia.
+
+**O PLANO PEDAGÓGICO (5 fases, ~9 semanas):**
+- **F0 · O terreno (sem. 0):** geografia do teclado em Lá maior (as notas da peça), os 4 acordes
+  do rio em bloco, o pulso 4/4, escuta ativa das 6 seções (musicalidade antes de técnica).
+- **F1 · O rio — mão esquerda (sem. 1–2):** as 4 células (F#m·D·A·E) como rituais de mão —
+  bloco → quebrado → loop no metrônomo. Saída: 8 voltas do loop sem olhar, a 60.
+- **F2 · A melodia — mão direita (sem. 2–3):** A1 cantado e tocado; o tema A2 primeiro SEM o
+  pedal interno, depois com (formas 5-1-2-1).
+- **F3 · O tecido — mãos juntas (sem. 4–6):** A1, depois A2, 2 compassos por vez (lego);
+  B = os 2 desenhos da direita (a onda e a cascata) + baixo grave, a 50% do andamento;
+  A3 e B′ saem "de graça" (reciclagem); a coda e o final suspenso no E.
+- **F4 · A montagem e o voo (sem. 7–9):** costura das 6 seções, escada de andamento 60→65→70→78
+  (degrau só com 3 execuções limpas), dinâmica/fraseado (a partitura não marca — o mapa sugere),
+  recital do sofá (gravação semanal).
+- **Rotina diária (30 min):** 10' rio (mão esquerda) · 15' frase do dia (direita→juntas) ·
+  5' revisão do que já estava bom.
+- **Ferramentas que a fábrica vai gerar:** mapa por compasso (2 mãos, células nomeadas +
+  dedilhado), teclado-guia da geografia da peça, o quebra-cabeça das 6 seções + guia de
+  montagem, **MIDIs de estudo** (esquerda sozinha / direita sozinha / mãos juntas × 3
+  andamentos — o "tocar junto" de quem não lê), checklists de saída por fase.
+- **Transparências:** sem oitavas simultâneas na peça (pedal A4/A5 é alternado — serve mão
+  pequena); andamento elástico é estilisticamente correto (se B ficar parede a 78, toca a 65);
+  a fonte não tem dedilhado/dinâmica — as camadas do mapa são sugestões a validar na prática.
+
+**PRÓXIMO PASSO:** construir a fábrica gera_river.py (fonte única = o .mscz parseado pelo
+mscx_parse) e gerar as entregas: HTML pedagógico + DOCX de atril + MIDIs de estudo.
 
 ## 🌹 Bed of Roses — Bon Jovi · versão Matthias Nebel (The Voice of Germany 2018) — PROVA DE CONCEITO Nº 3 · COMPLETA (CHAT + HTML + DOCX)
 
