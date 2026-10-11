@@ -15,6 +15,7 @@ SSH_URL="git@github.com:institutocura-maker/midi2cifra.git"
 MODO="puxa (HTTPS, sem chave)"
 URL="$HTTPS_URL"
 if [ -f "$HOME/.ssh/id_ed25519" ]; then
+  chmod 700 "$HOME/.ssh" 2>/dev/null; chmod 600 "$HOME/.ssh/id_ed25519" "$HOME/.ssh/config" 2>/dev/null
   MSG=$(ssh -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1 || true)
   case "$MSG" in
     *"successfully authenticated"*) MODO="puxa+empurra (SSH/deploy key)"; URL="$SSH_URL" ;;
