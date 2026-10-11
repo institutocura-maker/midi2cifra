@@ -31,8 +31,11 @@ mapas-musicais/
     │                             dsb-cama-e-transcricao.md · imagens-referencia/ (4 prévias — beco sem saída)
     └── saidas/ .................. mapa-musical-dont-stop-believin.html · .docx · teclado-dsb.png
 └── 05-river-flows-in-you/
-    ├── trabalho/ ................. river-flow-in-you.mscz (partitura MuseScore 4.40 — a fonte)
-    └── saidas/ .................. (a gerar: o mapa pedagógico HTML + DOCX)
+    ├── trabalho/ ................. river-flow-in-you.mscz (a fonte) · gera_river.py (mapa+MIDIs)
+    │                            · gera_river_docx.py (atril papel)
+    └── saidas/ .................. mapa-pedagogico-river-flows-in-you.html ·
+                                 atril-river-flows-in-you.docx · teclado-river.png ·
+                                 estudo-{esquerda,direita,juntas}-{60,70,78}.mid (×9)
 ```
 
 **Convenções:**
@@ -42,8 +45,9 @@ mapas-musicais/
 - Cada fábrica escreve em `../saidas/` **de onde for chamada** (âncora `SAIDAS` no pé de cada
   script). Roda da raiz: `python3 04-dont-stop-believin/trabalho/gera_dsb.py`.
 - Tudo de uma vez: `bash ferramentas/regenera-tudo.sh`.
-- Verificação pós-mudança (03/10/2026): 8/8 fábricas ✓ · 5/5 HTMLs byte a byte idênticos aos
-  anteriores · DOCXs com auto-checagem de estrutura ✓.
+- Verificação pós-mudança (11/10/2026, com a PoC 5): 10/10 fábricas ✓ · 19 arquivos não-DOCX
+  (HTML+MIDI+PNG) byte a byte idênticos aos anteriores · os 5 DOCX mudam de md5 a cada geração
+  (zip com timestamp interno — a checagem deles é a auto-checagem de estrutura, que roda ✓).
 
 ## 🐙 GITHUB — https://github.com/institutocura-maker/midi2cifra (público ✓)
 
@@ -67,7 +71,7 @@ mapas-musicais/
   o agente para o `LEIA-ME.md` (e/ou clonar o repo) — o mapa completo do projeto está aqui. O
   GitHub é o seguro extra: duplicata fora da plataforma + histórico de versões + canal de arquivos.
 
-## 🌊 River Flows in You — Yiruma · PROVA DE CONCEITO Nº 5 (PEDAGÓGICA) · EM ANDAMENTO
+## 🌊 River Flows in You — Yiruma · PROVA DE CONCEITO Nº 5 (PEDAGÓGICA) · COMPLETA (HTML + DOCX + 9 MIDIs)
 
 O primeiro mapa pra ALUNO: o filho mais novo do usuário quer aprender a peça — plano
 pedagógico completo, as duas mãos, do primeiro contato até a peça inteira. Mapa "mais amplo":
@@ -128,6 +132,37 @@ duas claves).
 
 **PRÓXIMO PASSO:** construir a fábrica gera_river.py (fonte única = o .mscz parseado pelo
 mscx_parse) e gerar as entregas: HTML pedagógico + DOCX de atril + MIDIs de estudo.
+
+---
+
+**A FÁBRICA ESTÁ PRONTA E ENTREGUE (11/10/2026):** 12 arquivos em `05-river-flows-in-you/saidas/`,
+tudo regenerável de uma fonte única (o .mscz, parseado na hora — nenhuma nota digitada à mão).
+
+- **mapa-pedagogico-river-flows-in-you.html** — o mapa completo: como usar (não-leitor) ·
+  teclado-guia E2–E6 (dourado=esquerda, ciano=direita, A4 o ponto de encontro, E6 o teto) ·
+  os 4 rituais do rio (células + dedos + versões fundas) · as 4 formas de mão da direita ·
+  o quebra-cabeça das 6 seções · **a peça compasso a compasso (47 × 2 linhas MD/ME, com
+  rótulo do rio por compasso, pedal/teto coloridos, graças marcadas com ~)** · MIDIs ·
+  plano de 5 fases com checklists · as 6 costuras · transparência.
+- **atril-river-flows-in-you.docx** — a versão PAPEL pro teclado (A4): mesmos dados,
+  teclado-guia PNG, tabela por seção (2 linhas/compasso), caixas das respirações (m21/m38) e
+  do final suspenso, e uma seção **Anotações** com linhas em branco pro DEDILHADO VALIDADO na
+  prática (é a ponte de volta: o que o aluno validar volta pra fábrica).
+- **9 MIDIs de estudo** — `estudo-{esquerda,direita,juntas}-{60,70,78}.mid` (formato 1, PPQ
+  480, MD ch0 vel84 + ME ch1 vel64; as 19 notas de graça viram "crush" de 1/8 antes da nota
+  principal — transparência). Validados ponta-a-ponta pelo midi_parse da casa: 556+298 notas,
+  47.00 compassos de timeline, tempos 60/70/78 corretos.
+- **teclado-river.png** — o teclado-guia da geografia (embutido no DOCX).
+
+**Aprendizados técnicos da PoC 5 (na fábrica):**
+- mscx_parse ganhou **grace + gap**: Chord com `<acciaccatura/>`/`<appoggiatura/>` → tempo
+  métrico ZERO (19 casos); `<location><fractions>N/D</fractions>` na voz = gap de 4·N/D
+  tempos (1 caso: m19, 1/16). Com isso, os 94 compassos×clave somam 4.0 EXATOS.
+- **Inferência das células do rio** por conjuntos de classes de altura (segmenta a clave de
+  Fá; fecha segmento se já tem 4 eventos ou se o pc-set estoura o canônico), com desempate
+  pela FUNDAMENTAL NO BAIXO — sem o desempate, m2/m4/m47 (E sozinho) rotulavam como D.
+- E6 = MIDI 88, não 76 (76 = E5) — bug clássico de oitava, pego pelo sanity.
+- Bpm→µs: 70→857142, 78→769230 (truncado; inaudível).
 
 ## 🌹 Bed of Roses — Bon Jovi · versão Matthias Nebel (The Voice of Germany 2018) — PROVA DE CONCEITO Nº 3 · COMPLETA (CHAT + HTML + DOCX)
 

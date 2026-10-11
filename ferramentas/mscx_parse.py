@@ -66,6 +66,10 @@ def parse(root):
                     if el.tag == 'Chord':
                         dt = el.findtext('durationType')
                         dots = int(el.findtext('dots') or 0)
+                        grace = None
+                        for c in el:
+                            if c.tag in ('acciaccatura', 'appoggiatura'):
+                                grace = c.tag
                         notas = []
                         for n in el.findall('Note'):
                             tie = n.find('Tie')
@@ -74,10 +78,18 @@ def parse(root):
                                 'tpc': n.findtext('tpc'),
                                 'tie': tie.get('type') if tie is not None else None,
                             })
-                        evs.append({'t': 'chord', 'dur': dt, 'dots': dots, 'notas': notas})
+                        evs.append({'t': 'chord', 'dur': dt, 'dots': dots, 'notas': notas,
+                                    'grace': grace})
                     elif el.tag == 'Rest':
                         evs.append({'t': 'rest', 'dur': el.findtext('durationType'),
                                     'dots': int(el.findtext('dots') or 0)})
+                    elif el.tag == 'location':
+                        frac = el.findtext('fractions')       # ex. '1/16' (de semibreve)
+                        q = 0.0
+                        if frac and '/' in frac:
+                            n_, d_ = frac.split('/')
+                            q = 4.0 * int(n_) / int(d_)
+                        evs.append({'t': 'gap', 'q': q})
                     elif el.tag in ('KeySig', 'TimeSig', 'Tempo', 'Clef'):
                         med['attrs'].setdefault(el.tag, []).append(
                             {c.tag: c.text for c in el})
@@ -98,9 +110,13 @@ def _ev_str(ev):
     if ev['t'] == 'rest':
         d = DUR.get(ev['dur'], ('?', 0))[0]
         return d + '.' * ev.get('dots', 0) + 'R'
+    if ev['t'] == 'gap':
+        return '—'
     d = DUR.get(ev['dur'], ('?', 0))[0]
     pts = [nome(n['pitch'], n['tpc']) + ('→' if n['tie'] == 'start' else '')
            for n in ev['notas']]
+    if ev.get('grace'):
+        return '~[' + '+'.join(pts) + ']'
     return d + '.' * ev.get('dots', 0) + '[' + '+'.join(pts) + ']'
 
 
