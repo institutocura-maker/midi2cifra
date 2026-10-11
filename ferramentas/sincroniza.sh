@@ -12,6 +12,10 @@ cd "$(dirname "$0")/.."
 HTTPS_URL="https://github.com/institutocura-maker/midi2cifra.git"
 SSH_URL="git@github.com:institutocura-maker/midi2cifra.git"
 
+# identidade de commit (o .git/config não sobrevive entre sessões da plataforma)
+git config user.name  >/dev/null 2>&1 || git config user.name  "Projeto Mapas Musicais"
+git config user.email >/dev/null 2>&1 || git config user.email "mapas-musicais@local"
+
 MODO="puxa (HTTPS, sem chave)"
 URL="$HTTPS_URL"
 if [ -f "$HOME/.ssh/id_ed25519" ]; then
