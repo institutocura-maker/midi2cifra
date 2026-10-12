@@ -31,6 +31,8 @@ mapas-musicais/
     │                             dsb-cama-e-transcricao.md · imagens-referencia/ (4 prévias — beco sem saída)
     └── saidas/ .................. mapa-musical-dont-stop-believin.html · .docx · teclado-dsb.png
 └── 05-river-flows-in-you/
+    ├── diario-poc-5.md ........... diário de decisões e aprendizados da PoC 5
+    │                             (a "memória das decisões, não só do código")
     ├── trabalho/ ................. river-flow-in-you.mscz (a fonte) · gera_river.py (mapa+MIDIs)
     │                            · gera_river_docx.py (atril papel)
     └── saidas/ .................. mapa-pedagogico-river-flows-in-you.html ·
@@ -137,6 +139,10 @@ mscx_parse) e gerar as entregas: HTML pedagógico + DOCX de atril + MIDIs de est
 
 **A FÁBRICA ESTÁ PRONTA E ENTREGUE (11/10/2026):** 12 arquivos em `05-river-flows-in-you/saidas/`,
 tudo regenerável de uma fonte única (o .mscz, parseado na hora — nenhuma nota digitada à mão).
+
+**Diário de decisões (12/10/2026):** `05-river-flows-in-you/diario-poc-5.md` — análise e avaliação
+do processo (mscz vs midi, as duas claves, as dificuldades, as lições), arquivado a pedido do
+usuário. O feedback do aluno (treinos) virá depois — a seção Anotações do atril é o canal.
 
 - **mapa-pedagogico-river-flows-in-you.html** — o mapa completo: como usar (não-leitor) ·
   teclado-guia E2–E6 (dourado=esquerda, ciano=direita, A4 o ponto de encontro, E6 o teto) ·
