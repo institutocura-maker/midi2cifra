@@ -81,8 +81,10 @@ def parse(root):
                         evs.append({'t': 'chord', 'dur': dt, 'dots': dots, 'notas': notas,
                                     'grace': grace})
                     elif el.tag == 'Rest':
-                        evs.append({'t': 'rest', 'dur': el.findtext('durationType'),
-                                    'dots': int(el.findtext('dots') or 0)})
+                        dt = el.findtext('durationType')
+                        evs.append({'t': 'rest', 'dur': dt,
+                                    'dots': int(el.findtext('dots') or 0),
+                                    'nominal': dt == 'measure'})   # pausa de compasso inteiro
                     elif el.tag == 'location':
                         frac = el.findtext('fractions')       # ex. '1/16' (de semibreve)
                         q = 0.0
@@ -108,6 +110,8 @@ def parse(root):
 # ─────────────────────────── relatório ───────────────────────────
 def _ev_str(ev):
     if ev['t'] == 'rest':
+        if ev['dur'] == 'measure':
+            return '𝄽'                          # pausa de compasso inteiro
         d = DUR.get(ev['dur'], ('?', 0))[0]
         return d + '.' * ev.get('dots', 0) + 'R'
     if ev['t'] == 'gap':

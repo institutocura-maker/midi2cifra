@@ -15,7 +15,7 @@ mapas-musicais/
 │   ├── mscx_parse.py ............. dissect de partituras MuseScore (.mscz/.mscx)
 │   ├── vocal_dump.py ............. dump da pista vocal
 │   ├── sincroniza.sh ............. puxa o que o usuário subiu; com a deploy key, EMPURRA também
-│   └── regenera-tudo.sh .......... roda as 8 fábricas e confere (de qualquer lugar)
+│   └── regenera-tudo.sh .......... roda as 11 fábricas e confere (de qualquer lugar)
 ├── 01-november-rain/
 │   ├── trabalho/ ................. gera_mapa.py · gera_docx.py · novemberrain.mid
 │   └── saidas/ .................. mapa-musical-november-rain.html · .docx
@@ -41,9 +41,11 @@ mapas-musicais/
 └── 06-forest-corciolli/
     ├── trabalho/ ................. UN-Forest.mid (transcrição IA crua) · UN-Forest.mscz
     │                            (curada: Si maior 5♯, 455 compassos 3/4, MuseScore 4.70)
-    │                            · sonda_compasso.py (sonda do fôlego — protótipo do timeline)
-    └── saidas/ .................. sonda-0-piano-sozinho.mid · sonda-A-compasso-1s.mid ·
-                                 sonda-B-compasso-2s.mid (o resto: a criar)
+    │                            · sonda_compasso.py · gera_forest.py (fábrica do Modo Andarilho)
+    └── saidas/ .................. modo-andarilho-forest.html · rota-original.mid ·
+                                 play-along-com-a-gravacao.mid · morada-{B4,F#4,E4,C#4,G#4,
+                                 B2,C#5,D#4}.mid · gestos-todos.mid · caminho-do-andarilho-
+                                 {1,2,3}.mid · sonda-{0,A,B}-*.mid (3)
 ```
 
 **Convenções:**
@@ -176,7 +178,7 @@ usuário. O feedback do aluno (treinos) virá depois — a seção Anotações d
 - E6 = MIDI 88, não 76 (76 = E5) — bug clássico de oitava, pego pelo sanity.
 - Bpm→µs: 70→857142, 78→769230 (truncado; inaudível).
 
-## 🌲 Forest — Corciolli · PROVA DE CONCEITO Nº 6 (PEDAGÓGICA) · DISSECAÇÃO FORENSE (12/10/2026)
+## 🌲 Forest — Corciolli · PROVA DE CONCEITO Nº 6 (PEDAGÓGICA) · MODO ANDARILHO (HTML + 14 MIDIs · DOCX a caminho)
 
 **A música:** "Forest" = "Floresta", faixa 3 de *A Tranquilidade dos Sons da Natureza* (Azul
 Music, 2001 · catálogo AMCD109 · relançamento streaming 2014 como *Nature/Sounds of Nature*),
@@ -266,14 +268,36 @@ a fidelidade e ACRESCENTA liberdade:
   (cada morada/gesto em loop + N caminhos do andarilho sorteados + rota original + play-along
   sincronizado com a gravação, intro de 48s). Se o baralho ficar pequeno: dados físicos (d20).
 
-**PRÓXIMO PASSO (atualizado 12/10):** patch mscx_parse (pausa de compasso = nominal) → fábrica
-`gera_forest.py` no design do Modo Andarilho (segmentação de moradas/gestos, clustering de
-motivos, gramática, MIDIs).
+**FÁBRICA ENTREGUE (12/10/2026) — `06-forest-corciolli/trabalho/gera_forest.py`: O MODO
+ANDARILHO está de pé.** Regenera tudo com `bash ferramentas/regenera-tudo.sh` (11 fábricas,
+pipeline verde). Segmentação da peça em **112 episódios** que cobrem os 455 pulsos sem resto:
+**57 moradas** (runs de pedal ≥3 pulsos; greedy esq→dir, desempate por nº de pulsos solos
+globais) · **42 travessias** · **13 clareiras** — exatamente as 13 já mapeadas na dissecção
+(30, 37–38, 44, 138, 254, 266, 331, 372–375, 390). Nomes das moradas: B4=A Casa, F#4=O Portão,
+E4=A Ponte, C#4=O Vale, G#4=A Encosta, B2=O Chão, C#5=A Torrinha, D#4=A Trave, B3=O Porão,
+B5=O Mirante (poéticos, todos com âncora musical explicada no HTML). Gestos agrupados por
+conjunto de notas (ordem fica nas realizações): top = C#4·E4 ×9, E4·B4 ×7, B4·C#5 ×6,
+E3·B3·D#4 ×6 — bate com o censo da dissecção. Gramática = transições reais entre episódios
+(B4→TRAV×10; TRAV→F#4×7/B4×7/CLAR×6; CLAR→TRAV×8…). Nota de honestidade: o empate p79–83
+anotado a olho como F#4 era, de fato, **morada B2** (O Chão persiste 5 pulsos vs 4 do F#4 —
+a fábrica enxergou melhor que o olho; p1 também contém B4, a anacruze desemboca nele).
 
-**PRÓXIMO PASSO (atualizado 12/10):** veredito da sonda (A ou B) → patch mscx_parse (pausa de
-compasso = nominal; location negativa já ok) → plano pedagógico → fábrica `gera_forest.py`
-(mãos re-derivadas do fluxo, clareiras marcadas, MIDIs de estudo no tempo real + variante
-play-along com a intro de 48s pra sincronizar com a gravação original).
+**ENTREGAS em `06-forest-corciolli/saidas/` (14 MIDIs + 1 HTML):**
+- `modo-andarilho-forest.html` — o mapa jogável: como jogar (2 dados, 3 modos), teclado SVG
+  E2–E6 (moradas em ouro, B4 circulado = A Casa), cards de morada, tabela dos 28 gestos,
+  rota-strip visual + tabela dos 112 episódios, gramática por morada, MIDIs, transparência.
+- `rota-original.mid` (7:53, a peça inteira, fidelidade) · `play-along-com-a-gravacao.mid`
+  (8:26 = 48s de pererecas + piano, pra tocar junto com a gravação).
+- `morada-{B4,F#4,E4,C#4,G#4,B2,C#5,D#4}.mid` — a morada em loop ~30s cada.
+- `gestos-todos.mid` (38s, 28 famílias na ordem da tabela) ·
+  `caminho-do-andarilho-{1,2,3}.mid` — caminhos sorteados só por transições reais da
+  gramática, escolhendo episódios originais sem repetir (1:46 / 2:14 / 2:45), terminando na
+  maior clareira + Casa curta ("volta pra casa").
+- Sanidade embutida na fábrica: 455 pulsos ×2 claves ✓ · extensão E2–E6 ✓ · tudo em Si maior
+  ✓ · 106 pulsos de nota única (B4=34) ✓ · episódios cobrem 455 ✓ · timeline 1097/1098 notas
+  (1 uníssono exato dedup) ✓.
+
+**PRÓXIMO PASSO:** cartas imprimíveis DOCX (baralho físico do Modo Andarilho).
 
 ---
 
