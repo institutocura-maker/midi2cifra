@@ -41,7 +41,9 @@ mapas-musicais/
 └── 06-forest-corciolli/
     ├── trabalho/ ................. UN-Forest.mid (transcrição IA crua) · UN-Forest.mscz
     │                            (curada: Si maior 5♯, 455 compassos 3/4, MuseScore 4.70)
-    └── saidas/ .................. (a criar: o mapa pedagógico + MIDIs de estudo)
+    │                            · sonda_compasso.py (sonda do fôlego — protótipo do timeline)
+    └── saidas/ .................. sonda-0-piano-sozinho.mid · sonda-A-compasso-1s.mid ·
+                                 sonda-B-compasso-2s.mid (o resto: a criar)
 ```
 
 **Convenções:**
@@ -212,9 +214,29 @@ os 455 compassos devem derreter em ~20 células de ostinato.
 contra a gravação?); (b) a gravação tem mesmo ~48s de intro e ~40s de outro só-natureza?;
 (c) o compasso: 3/4 valsa rápida ou 6/8 lento?; (d) o tom real soa como Si maior (5♯)?
 
-**PRÓXIMO PASSO:** respostas → patch mscx_parse (measure-rest + location negativa) → plano
-pedagógico → fábrica `gera_forest.py` (mãos re-derivadas, clareiras marcadas, MIDIs de estudo
-no tempo real + variante play-along sincronizada com a gravação original).
+**RESPOSTAS (12/10/2026) — e a reviravolta do tom:**
+- **(a) RESOLVIDO COM PLOT TWIST:** o +1 semitom não corrige a IA — **calibra o PIANO DA CASA,
+  que está meio tom abaixo do padrão**. Cadeia: gravação ~Si♭ → IA transcreve Si♭ (correto!) →
+  +1 semitom → no piano da casa soa Si♭ = igual à gravação. Logo o .mscz em Si maior (5♯) é o
+  tom do instrumento DELE, não o da gravação. **O mapa fica em Si maior** (é ele quem toca),
+  com nota de transparência: num piano afinado, tocar −1 semitom. Verificação opcional do tom
+  absoluto da gravação: afinador contra o áudio. (Os re-ataques das notas mantidas: curadoria
+  de ouvido dele, contra a gravação.)
+- **(b) CONFIRMADO:** intro e final só-pererecas, ~48s e ~40s ("deve ser mesmo os tempos").
+- **(c) USUÁRIO NÃO JULGA POR TEORIA** (toca de cifras e ouvido) → **SONDAS DE ESCUTA geradas**
+  em `saidas/`: `sonda-0-piano-sozinho.mid` (referência), `sonda-A-compasso-1s.mid` (madeira
+  forte a cada 3 unidades ≈ 1 s — leitura valsa) e `sonda-B-compasso-2s.mid` (forte a cada
+  6 unidades ≈ 2 s com fraca no meio — leitura 6/8). m1–48 a ♩=173/unidade (~50 s), com as
+  clareiras m30/37–38/44 inclusas. O ouvido dele decide onde o coração bate. Fábrica:
+  `trabalho/sonda_compasso.py` (protótipo do timeline com pausa-de-compasso e location
+  negativa resolvidos — a promover pro mscx_parse na fábrica).
+- **(d)** absorvido em (a). Tônica exata (Si♭ maior vs Sol menor na gravação) sai da análise
+  harmônica da fábrica.
+
+**PRÓXIMO PASSO (atualizado 12/10):** veredito da sonda (A ou B) → patch mscx_parse (pausa de
+compasso = nominal; location negativa já ok) → plano pedagógico → fábrica `gera_forest.py`
+(mãos re-derivadas do fluxo, clareiras marcadas, MIDIs de estudo no tempo real + variante
+play-along com a intro de 48s pra sincronizar com a gravação original).
 
 ---
 
