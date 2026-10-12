@@ -15,7 +15,7 @@ mapas-musicais/
 │   ├── mscx_parse.py ............. dissect de partituras MuseScore (.mscz/.mscx)
 │   ├── vocal_dump.py ............. dump da pista vocal
 │   ├── sincroniza.sh ............. puxa o que o usuário subiu; com a deploy key, EMPURRA também
-│   └── regenera-tudo.sh .......... roda as 11 fábricas e confere (de qualquer lugar)
+│   └── regenera-tudo.sh .......... roda as 12 fábricas e confere (de qualquer lugar)
 ├── 01-november-rain/
 │   ├── trabalho/ ................. gera_mapa.py · gera_docx.py · novemberrain.mid
 │   └── saidas/ .................. mapa-musical-november-rain.html · .docx
@@ -41,8 +41,11 @@ mapas-musicais/
 └── 06-forest-corciolli/
     ├── trabalho/ ................. UN-Forest.mid (transcrição IA crua) · UN-Forest.mscz
     │                            (curada: Si maior 5♯, 455 compassos 3/4, MuseScore 4.70)
-    │                            · sonda_compasso.py · gera_forest.py (fábrica do Modo Andarilho)
-    └── saidas/ .................. modo-andarilho-forest.html · rota-original.mid ·
+    │                            · sonda_compasso.py · gera_forest.py (fábrica do Modo
+    │                            Andarilho) · gera_forest_docx.py (fábrica do baralho)
+    │                            · cartas-png/ (mini-teclados das cartas — intermediário)
+    └── saidas/ .................. modo-andarilho-forest.html · baralho-do-andarilho.docx
+                                 · teclado-forest.png · rota-original.mid ·
                                  play-along-com-a-gravacao.mid · morada-{B4,F#4,E4,C#4,G#4,
                                  B2,C#5,D#4}.mid · gestos-todos.mid · caminho-do-andarilho-
                                  {1,2,3}.mid · sonda-{0,A,B}-*.mid (3)
@@ -178,7 +181,7 @@ usuário. O feedback do aluno (treinos) virá depois — a seção Anotações d
 - E6 = MIDI 88, não 76 (76 = E5) — bug clássico de oitava, pego pelo sanity.
 - Bpm→µs: 70→857142, 78→769230 (truncado; inaudível).
 
-## 🌲 Forest — Corciolli · PROVA DE CONCEITO Nº 6 (PEDAGÓGICA) · MODO ANDARILHO (HTML + 14 MIDIs · DOCX a caminho)
+## 🌲 Forest — Corciolli · PROVA DE CONCEITO Nº 6 (PEDAGÓGICA) · MODO ANDARILHO (HTML + 14 MIDIs + BARALHO DOCX)
 
 **A música:** "Forest" = "Floresta", faixa 3 de *A Tranquilidade dos Sons da Natureza* (Azul
 Music, 2001 · catálogo AMCD109 · relançamento streaming 2014 como *Nature/Sounds of Nature*),
@@ -297,7 +300,27 @@ a fábrica enxergou melhor que o olho; p1 também contém B4, a anacruze desembo
   ✓ · 106 pulsos de nota única (B4=34) ✓ · episódios cobrem 455 ✓ · timeline 1097/1098 notas
   (1 uníssono exato dedup) ✓.
 
-**PRÓXIMO PASSO:** cartas imprimíveis DOCX (baralho físico do Modo Andarilho).
+**BARALHO ENTREGUE (12/10/2026) — `06-forest-corciolli/trabalho/gera_forest_docx.py`: O
+BARALHO DO ANDARILHO em papel** (`saidas/baralho-do-andarilho.docx`, 121 KB, + capa
+`teclado-forest.png`). Importa `gera_forest.py` (fonte única — nenhuma nota retranscrita).
+**47 cartas** em grade 2×3 pra recortar (~8,7 × 8,3 cm, guias de corte = bordas da tabela):
+- **14 MORADAS douradas** (todas as nomeadas; C#3 e D#5, raras, ficaram fora — declarado):
+  cada carta com mini-teclado (âncora em ouro, A Casa circulada em vermelho, gestos
+  visitantes em verde), tempos/visitas, ânimo, gestos que passam por ali, pra onde o
+  Corciolli foi depois, **cifra por perto** (B/C#m/D#m/E/F#/G#m — pra quem pensa em
+  cifras), e o MIDI de loop pra ouvir.
+- **2 TRAVESSIAS** (a escala de Si maior em verde-pálido no teclado — a estrada) ·
+  **3 CLAREIRAS** (1 tempo, 2 tempos, a Grande de 4) · **28 GESTOS** com ordem mais
+  comum, durações em tempos e onde moram · **cartas brancas** nas casas vazias (invente
+  a sua morada — modo livre).
+- 3 páginas de referência: capa (o que é, 1ª notação, tom, como imprimir) · regras (6
+  passos, 3 modos, a LEI DO PEDAL) · gramática completa por morada.
+- Auto-checagem embutida: 45 imagens ✓ · 9 tabelas (1 gramática + 8 páginas de carta) ✓ ·
+  toda carta de morada cita seu MIDI ✓.
+
+**PRÓXIMO PASSO:** nenhum pendente na PoC 6 — fábrica + baralho entregues. Se o user
+quiser, follow-ups possíveis: verso das cartas, mais caminhos sorteados, ou testes de
+ouvido (mas só se ele pedir).
 
 ---
 
