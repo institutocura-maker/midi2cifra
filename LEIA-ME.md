@@ -52,6 +52,8 @@ mapas-musicais/
 ├── 07-billie-jean-retalianist/
 │   ├── trabalho/ ................. billie-jean-retalianist.pdf (a fonte oficial do
 │   │                            arranjador: Finale 2012 + Maestro, vetorial, 6 p. A4)
+│   │                            · billie-jean-video-ia.mscz (transcrição IA do vídeo:
+│   │                            a execução — auxiliar de validação e play-along)
 │   └── saidas/ .................. (a criar)
 ```
 
@@ -351,6 +353,18 @@ dois meses e meio depois do vídeo. Metadados: título "Billie Jean - Piano", au
 fábrica), **seções A–H**, ~110 compassos (números visíveis: 5, 13, 17, 21, 29, 41, 45, 49,
 57, 66, 78, 82, 86, 90, 96, 104, 108), dinâmicas (p, f, FF), rit. na p. 4.
 
+**A SEGUNDA FONTE (13/10/2026, upload do user):** `trabalho/billie-jean-video-ia.mscz`
+— transcrição IA do **áudio do vídeo** (MIDI→MSCZ, MuseScore 4.70, `originalFormat: mid`).
+Dissecção inicial: 2 pautas · **338 "medidas" em 3/4** (artefato do import — o PDF diz 4/4)
+· tempo 2,4333 semínimas/s → 417 s ≈ o vídeo (7:09) · **3 sustenidos = Fá# menor ✓ bate
+com o PDF** · 2545 notas (1333 agudo D2–F#6 + 1212 baixo G#1–F#5) · nota mais frequente
+F#4 ×235 (tônica ✓) · baixo em F#3/A3/C#3/E3 = arpejo de Fá# menor, a assinatura da peça ·
+abre com F#4 (agudo) e o baixo só entra na "medida" 12. **Papel definido: auxiliar, não
+fonte de verdade** — é a EXECUÇÃO gravada (timing real, oitavas reais, o que soa no
+vídeo), enquanto o PDF é a ESCRITA do arranjador. Vai servir pra: play-along sincronizado
+com o vídeo, contraprova da extração do PDF (zonas de divergência = revisar), e leitura de
+rubato/durações reais.
+
 **POR QUE ISTO É OURO:** a música inteira está no PDF como **glifos de texto Maestro em
 coordenadas exatas** (noteheads, hastes, pausas, cifras de compasso — tudo), e as linhas de
 pauta como gráficos vetoriais. Isso permite **extração nota-a-nota por "reverse-OMR"**
@@ -358,8 +372,8 @@ pauta como gráficos vetoriais. Isso permite **extração nota-a-nota por "rever
 .mscz da PoC 5, sem digitação nenhuma.
 
 **PRÓXIMO PASSO:** dissecção forense do PDF (pautas via operadores gráficos + glifos via
-texto com pypdf) → reconstrução MIDI nota-exata → sonda de escuta pro user validar →
-fábrica do Mapa Musical (padrão PoC).
+texto com pypdf) → reconstrução MIDI nota-exata → cruzamento com a transcrição IA do vídeo
+(contraprova) → sonda de escuta pro user validar → fábrica do Mapa Musical (padrão PoC).
 
 ---
 
