@@ -233,6 +233,43 @@ contra a gravação?); (b) a gravação tem mesmo ~48s de intro e ~40s de outro 
 - **(d)** absorvido em (a). Tônica exata (Si♭ maior vs Sol menor na gravação) sai da análise
   harmônica da fábrica.
 
+**VEREDITO DA SONDA (12/10/2026): 'B'** — o coração bate a cada ~2 s. Leitura: família 6/8 —
+cada "medida" 3/4 do arquivo é na verdade UM TEMPO (semínima pontuada ~1,04 s); a barra sentida
+= 2 tempos (~2,1 s); 455 tempos = 227,5 barras sentidas + anacruze. Re-metricação vira tarefa da
+fábrica (o mapa e os MIDIs usam a pulsação B, não as barras 3/4 do arquivo).
+
+**A ANATOMIA DA PEÇA (census no nível do tempo — 455 tempos):**
+- **33% dos tempos são repetição literal** (151/455); o material recorrente: pedais e gestos.
+- **Textura: 106 tempos de pedal de nota única** (B4×34 — a assinatura da peça, como o A4 do
+  River · G#4×14 · F#4×11 · C#4×9 · C#5×7 · E5×7 · F#5×6 · B3×5) · **336 tempos com gestos**
+  (2+ notas; 240 assinaturas exatas, 193 únicas — variadas; repetidos: C#4+E4 ×9, E4+B4 ×7,
+  B4+C#5 ×6, E3+B3+D#4 ×6, D#4+E4+B4 ×5) · 13 vazios (clareiras).
+- **Tom: Si MAIOR confirmado pelos baixos** (B4×51+B3×40+B2×32 = 123 baixos em Si vs E 67,
+  C# 68, F# 32; pcs globais = escala de Si maior com A# raro ×25). Na gravação real (piano
+  afinado): Si♭ maior.
+
+**O PIVÔ DE ESCOPO (12/10/2026) — proposta do usuário, desenho acordado: "O MODO ANDARILHO".**
+O usuário não quer o mapa integral compasso a compasso (peça longa, finalidade diferente): quer
+**as frases identificadas, tocáveis em ordem aleatória, pra tocar sem parar e improvisar** —
+com receio (declarado) de "deturpar" a música. Resposta da casa: a peça JÁ É uma máquina de
+recombinar (pedais que voltam 23× em pontos distantes, 33% de repetição) — o desenho preserva
+a fidelidade e ACRESCENTA liberdade:
+- **O Vocabulário (as cartas):** MORADAS (campos de pedal, cada qual com nota/tempos/ânimo) ·
+  GESTOS (famílias de motivos melódicos — clustering das 240 assinaturas em famílias) ·
+  CLAREIRAS (cartas de respiração — "a mata canta sozinha").
+- **A Rota Original:** a ordem gravada, preservada como referência + estudo (fidelidade).
+- **A Gramática do Corciolli:** quais gestos sobre quais moradas, quais moradas seguem quais —
+  o modo seguro (andar só onde ele andou).
+- **Modo Andarilho livre:** gesto sobre morada à vontade; a única lei é o pedal (gravidade
+  harmônica); clareira quando respirar. Dois dados, não um.
+- **Entregas:** mapa HTML (vocabulário + rota + gramática) · cartas imprimíveis DOCX · MIDIs
+  (cada morada/gesto em loop + N caminhos do andarilho sorteados + rota original + play-along
+  sincronizado com a gravação, intro de 48s). Se o baralho ficar pequeno: dados físicos (d20).
+
+**PRÓXIMO PASSO (atualizado 12/10):** patch mscx_parse (pausa de compasso = nominal) → fábrica
+`gera_forest.py` no design do Modo Andarilho (segmentação de moradas/gestos, clustering de
+motivos, gramática, MIDIs).
+
 **PRÓXIMO PASSO (atualizado 12/10):** veredito da sonda (A ou B) → patch mscx_parse (pausa de
 compasso = nominal; location negativa já ok) → plano pedagógico → fábrica `gera_forest.py`
 (mãos re-derivadas do fluxo, clareiras marcadas, MIDIs de estudo no tempo real + variante
