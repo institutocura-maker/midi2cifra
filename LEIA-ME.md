@@ -49,6 +49,10 @@ mapas-musicais/
                                  play-along-com-a-gravacao.mid · morada-{B4,F#4,E4,C#4,G#4,
                                  B2,C#5,D#4}.mid · gestos-todos.mid · caminho-do-andarilho-
                                  {1,2,3}.mid · sonda-{0,A,B}-*.mid (3)
+├── 07-billie-jean-retalianist/
+│   ├── trabalho/ ................. billie-jean-retalianist.pdf (a fonte oficial do
+│   │                            arranjador: Finale 2012 + Maestro, vetorial, 6 p. A4)
+│   └── saidas/ .................. (a criar)
 ```
 
 **Convenções:**
@@ -321,6 +325,41 @@ BARALHO DO ANDARILHO em papel** (`saidas/baralho-do-andarilho.docx`, 121 KB, + c
 **PRÓXIMO PASSO:** nenhum pendente na PoC 6 — fábrica + baralho entregues. Se o user
 quiser, follow-ups possíveis: verso das cartas, mais caminhos sorteados, ou testes de
 ouvido (mas só se ele pedir).
+
+---
+
+## 🕺 Billie Jean — Michael Jackson · versão lírica de piano de Romain Olivieri (Retalianist) · PROVA DE CONCEITO Nº 7 · PESQUISA + FONTE ADQUIRIDAS (13/10/2026)
+
+**A PESQUISA (13/10/2026, desafio aceito e cumprido):** o vídeo do user
+(youtube.com/watch?v=BE-ru_9fpqU, 06/06/2013, 7:09) é "Michael Jackson - Billie Jean
+(Piano + Sheet)" do canal **Retalianist = Romain Olivieri**, Paris — "adapto músicas ao
+piano desde 2011". A versão "lírica" é explicada pelo próprio: baseada **no riff da linha
+de baixo** e com **tempo bem desacelerado** ("som mais langoroso que o original"). A
+partitura prometida na descrição estava **escondida**: o link aponta pra raiz do Bandcamp
+e a Billie Jean não é item à vista — mora na lista do **"Sheet music pack"**
+(retalianist.bandcamp.com/album/sheet-music-pack, 07/07/2015, 24 partituras,
+**name-your-price**, "donate if you want ;-)"). Wayback confirma que o pack já era o canal
+oficial das partituras desde 2016. User baixou o ZIP e subiu o PDF pelo GitHub.
+
+**A FONTE (dissecção inicial ✓):** `07-billie-jean-retalianist/trabalho/billie-jean-retalianist.pdf`
+— 6 p. A4, **PDF vetorial de verdade, não escaneamento**: gravado em **Finale 2012** com
+fonte musical **Maestro**, impresso em PDF pelo Mac (OS X 10.8.4 Quartz) em **25/08/2013** —
+dois meses e meio depois do vídeo. Metadados: título "Billie Jean - Piano", autor
+"Michael Jackson - arr. Romain Olivieri", keywords "weareelessar.com" (o site antigo dele
+— alias **Elessar**). **Primeira leitura musical:** piano em pauta dupla, **Fá# menor (3♯
+= o tom original da música), 4/4, ♩=75** (o original corre ~117 — a "langueza" é marca de
+fábrica), **seções A–H**, ~110 compassos (números visíveis: 5, 13, 17, 21, 29, 41, 45, 49,
+57, 66, 78, 82, 86, 90, 96, 104, 108), dinâmicas (p, f, FF), rit. na p. 4.
+
+**POR QUE ISTO É OURO:** a música inteira está no PDF como **glifos de texto Maestro em
+coordenadas exatas** (noteheads, hastes, pausas, cifras de compasso — tudo), e as linhas de
+pauta como gráficos vetoriais. Isso permite **extração nota-a-nota por "reverse-OMR"**
+(posição Y do notehead × linha de pauta = altura; glifo = figura) — fonte tão boa quanto o
+.mscz da PoC 5, sem digitação nenhuma.
+
+**PRÓXIMO PASSO:** dissecção forense do PDF (pautas via operadores gráficos + glifos via
+texto com pypdf) → reconstrução MIDI nota-exata → sonda de escuta pro user validar →
+fábrica do Mapa Musical (padrão PoC).
 
 ---
 
