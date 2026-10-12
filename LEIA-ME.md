@@ -30,7 +30,7 @@ mapas-musicais/
     │                             dsb-piano-solo-referencia.mid · cifra-usuario-dsb.txt ·
     │                             dsb-cama-e-transcricao.md · imagens-referencia/ (4 prévias — beco sem saída)
     └── saidas/ .................. mapa-musical-dont-stop-believin.html · .docx · teclado-dsb.png
-└── 05-river-flows-in-you/
+├── 05-river-flows-in-you/
     ├── diario-poc-5.md ........... diário de decisões e aprendizados da PoC 5
     │                             (a "memória das decisões, não só do código")
     ├── trabalho/ ................. river-flow-in-you.mscz (a fonte) · gera_river.py (mapa+MIDIs)
@@ -38,6 +38,10 @@ mapas-musicais/
     └── saidas/ .................. mapa-pedagogico-river-flows-in-you.html ·
                                  atril-river-flows-in-you.docx · teclado-river.png ·
                                  estudo-{esquerda,direita,juntas}-{60,70,78}.mid (×9)
+└── 06-forest-corciolli/
+    ├── trabalho/ ................. UN-Forest.mid (transcrição IA crua) · UN-Forest.mscz
+    │                            (curada: Si maior 5♯, 455 compassos 3/4, MuseScore 4.70)
+    └── saidas/ .................. (a criar: o mapa pedagógico + MIDIs de estudo)
 ```
 
 **Convenções:**
@@ -169,6 +173,50 @@ usuário. O feedback do aluno (treinos) virá depois — a seção Anotações d
   pela FUNDAMENTAL NO BAIXO — sem o desempate, m2/m4/m47 (E sozinho) rotulavam como D.
 - E6 = MIDI 88, não 76 (76 = E5) — bug clássico de oitava, pego pelo sanity.
 - Bpm→µs: 70→857142, 78→769230 (truncado; inaudível).
+
+## 🌲 Forest — Corciolli · PROVA DE CONCEITO Nº 6 (PEDAGÓGICA) · DISSECAÇÃO FORENSE (12/10/2026)
+
+**A música:** "Forest" = "Floresta", faixa 3 de *A Tranquilidade dos Sons da Natureza* (Azul
+Music, 2001 · catálogo AMCD109 · relançamento streaming 2014 como *Nature/Sounds of Nature*),
+9:20, piano sobre paisagem sonora de floresta (as pererecas 🐸). **Sem partitura publicada em
+lugar nenhum** — verificadas Musicnotes/MuseScore/tutoriais: nada. A transcrição desta casa é,
+até onde se sabe, a primeira notação da peça.
+
+**Fontes (subidas pelo usuário via upload/ → 06-forest-corciolli/trabalho/):**
+- `UN-Forest.mid` — a transcrição IA crua (piano isolado por IA da gravação): 1 pista, 1002
+  notas, D#2–D#6, tempo 120 fixo, velocity 100 constante, onsets contínuos (rubato real),
+  notas sustentadas fundidas em notas longas.
+- `UN-Forest.mscz` — MuseScore 4.70 · 455 compassos 3/4 · armadura 5 sustenidos · 1098 notas.
+  **Curada pelo usuário** (a confirmar): +1 semitom (→ tom da gravação), notas sustentadas
+  re-articuladas (re-ataques de ouvido), quantização na grade.
+
+**A matemática temporal fecha (perícia 12/10):** gravação 9:20 = ~48s de intro só-natureza +
+7:52 de piano (MIDI@120 = 472s = MSCZ 455 compassos × ~1.04s) + ~40s de outro só-natureza.
+Unidade da grade MSCZ ≈ 0.347s → leitura como 3/4 ♩≈173 (ou 6/8 ♩.≈86) — o ouvido decide.
+
+**Problemas conhecidos da fonte (a fábrica contorna):**
+- **Staves NÃO são mãos confiáveis**: staff 1 (clave de FÁ) tem 85% das notas ≥C4 (sobe ao E6);
+  staff 2 (clave de SOL) tem 38% <C4 (desce ao E2). A fábrica vai re-derivar as mãos do fluxo
+  de notas (contorno/registro), ignorando a divisão de staves. Os pitches estão íntegros.
+- 6 compassos anômalos: m126/127/130/155/335 com `<location>` NEGATIVA (−1q = salto pra trás
+  sobreposto) e m412 superlotado (3.75). Pausas de compasso = `durationType="measure"` (parser:
+  tratar como compasso nominal, não 4.0).
+- Textura: 153 compassos c/ 2 staves · 205 só staff 1 · 84 só staff 2 · **13 vazios** (as
+  "clareiras" — solo de pererecas na gravação: m30, 37–38, 44, 138, 254, 266, 331, 372–375, 390).
+- Sem marcação de tempo no arquivo.
+
+**Ouro pedagógico:** estrutura de repetições riquíssima (m2 ×23, m30 ×13, m20/135/201 ×5…) —
+os 455 compassos devem derreter em ~20 células de ostinato.
+
+**PENDENTE (perguntas ao usuário):** (a) confirmar a curadoria (transpôs +1 de ouvido? re-ataques
+contra a gravação?); (b) a gravação tem mesmo ~48s de intro e ~40s de outro só-natureza?;
+(c) o compasso: 3/4 valsa rápida ou 6/8 lento?; (d) o tom real soa como Si maior (5♯)?
+
+**PRÓXIMO PASSO:** respostas → patch mscx_parse (measure-rest + location negativa) → plano
+pedagógico → fábrica `gera_forest.py` (mãos re-derivadas, clareiras marcadas, MIDIs de estudo
+no tempo real + variante play-along sincronizada com a gravação original).
+
+---
 
 ## 🌹 Bed of Roses — Bon Jovi · versão Matthias Nebel (The Voice of Germany 2018) — PROVA DE CONCEITO Nº 3 · COMPLETA (CHAT + HTML + DOCX)
 
