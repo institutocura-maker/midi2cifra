@@ -50,6 +50,8 @@ mapas-musicais/
                                  B2,C#5,D#4}.mid · gestos-todos.mid · caminho-do-andarilho-
                                  {1,2,3}.mid · sonda-{0,A,B}-*.mid (3)
 ├── 07-billie-jean-retalianist/
+│   ├── saidas/ .................. sonda-reconstrucao-pdf.mid (a escrita do PDF tocada:
+│   │                            1690 notas, 2 mãos, ♩=75, 6:00 — pra validar de ouvido)
 │   ├── trabalho/ ................. billie-jean-retalianist.pdf (a fonte oficial do
 │   │                            arranjador: Finale 2012 + Maestro, vetorial, 6 p. A4)
 │   │                            · billie-jean-video-ia.mscz (transcrição IA do vídeo:
@@ -371,9 +373,31 @@ pauta como gráficos vetoriais. Isso permite **extração nota-a-nota por "rever
 (posição Y do notehead × linha de pauta = altura; glifo = figura) — fonte tão boa quanto o
 .mscz da PoC 5, sem digitação nenhuma.
 
-**PRÓXIMO PASSO:** dissecção forense do PDF (pautas via operadores gráficos + glifos via
-texto com pypdf) → reconstrução MIDI nota-exata → cruzamento com a transcrição IA do vídeo
-(contraprova) → sonda de escuta pro user validar → fábrica do Mapa Musical (padrão PoC).
+**DISSECÇÃO NOTA-A-NOTA COMPLETA (14/10/2026):** `trabalho/pdf_dissect.py` — reverse-OMR
+feito à mão sobre o PDF vetorial: pautas por traços >40pt (28 sistemas), 114 compassos
+reais (2 barras de 1 tempo nos câmbios de seção + barra dupla final filtradas), glifos
+Maestro com coordenadas exatas (pt = Tm×0,12). **O que a extração aprendeu a ler:**
+noteheads (semínima/colcheia/mínima/semibreve) por posição na pauta (extensão G#1–F#5);
+acidentes locais (9: os E# da F#m harmônica + 1 Fá natural na seção G); armadura 3♯;
+hastes (a ±6,4pt da cabeça) e pontas; feixes pela espessura real do paralelogramo (393,
+incl. beamlets de semicolcheia); bandeiras com peso (colcheia/semicolcheia); pontos de
+aumento (deslocam ~2,1pt em nota de linha); pausas (semínima 0xCE, colcheia 0xE4 — sempre
+na linha central — + semibreve/mínima em T1.1); **vozes** (mesmo x + figuras diferentes =
+vozes distintas; offset de colisão ~6pt fundido); e **onsets por cadeia de durações por
+voz ancorada no x** (o espaçamento Finale é proporcional à duração, W≈28–35pt/tempo).
+Resultado: 1287 eventos · 1690 notas · validação 87% dos compassos fecham exato (os
+restantes: pausas de respiração reais + ±0,25 de ambiguidade) · pitch classes F# 369 /
+C# 324 / A 278 = Fá# menor cravado · contraprova IA: mesmos topos (F#4, C#4, A3, E4).
+**Compasso 1 decifrado = a assinatura da música:** riff F#4-C#4-E4-F#4 | E4-C#4-B3-C#4 em
+colcheias na mão direita sobre F#2+C#3+A3 de semibreve na esquerda; em m16 o riff MIGRA
+pra mão esquerda enquanto a direita segura F#4 — a construção do arranjador apareceu
+inteira no espelho. **SONDA:** `saidas/sonda-reconstrucao-pdf.mid` (939+751 notas, 6:00)
+— a ESCRITA do PDF tocada seqüencialmente, sem rubato, pra conferir de ouvido contra o
+vídeo. (Bônus: descobriu-se e corrigiu-se um bug de 4 bytes por trilha no
+`escreve_midi` — fim-de-trilha fora do comprimento declarado do chunk.)
+
+**PRÓXIMO PASSO:** user ouve a sonda contra o vídeo → fábrica do Mapa Musical (HTML/MIDI/
+DOCX no padrão das PoCs), com a IA como contraprova de execução (rubato/durações reais).
 
 ---
 
