@@ -50,13 +50,18 @@ mapas-musicais/
                                  B2,C#5,D#4}.mid · gestos-todos.mid · caminho-do-andarilho-
                                  {1,2,3}.mid · sonda-{0,A,B}-*.mid (3)
 ├── 07-billie-jean-retalianist/
-│   ├── saidas/ .................. sonda-reconstrucao-pdf.mid (a escrita do PDF tocada:
-│   │                            1690 notas, 2 mãos, ♩=75, 6:00 — pra validar de ouvido)
-│   ├── trabalho/ ................. billie-jean-retalianist.pdf (a fonte oficial do
-│   │                            arranjador: Finale 2012 + Maestro, vetorial, 6 p. A4)
-│   │                            · billie-jean-video-ia.mscz (transcrição IA do vídeo:
-│   │                            a execução — auxiliar de validação e play-along)
-│   └── saidas/ .................. (a criar)
+│   ├── saidas/ .................. mapa-musical-billie-jean.html (O MAPA) + .docx +
+│   │                            teclado-billie.png + a-assinatura.mid (loop do riff)
+│   │                            + estudo-{esquerda,direita,juntas}-{55,65,75}.mid (×9)
+│   │                            + sonda-reconstrucao-pdf.mid (a escrita do PDF tocada:
+│   │                            1690 notas, ♩=75, 6:00 — validada de ouvido ✓)
+│   └── trabalho/ ................. billie-jean-retalianist.pdf (a fonte oficial do
+│                                arranjador: Finale 2012 + Maestro, vetorial, 6 p. A4)
+│                                · billie-jean-video-ia.mscz (transcrição IA do vídeo:
+│                                a execução — auxiliar de validação e play-along)
+│                                · pdf_dissect.py (o reverse-OMR) · notas.json +
+│                                estrutura.json (a dissecção) · gera_billie_jean.py +
+│                                gera_billie_jean_docx.py (as fábricas do mapa)
 ```
 
 **Convenções:**
@@ -332,7 +337,7 @@ ouvido (mas só se ele pedir).
 
 ---
 
-## 🕺 Billie Jean — Michael Jackson · versão lírica de piano de Romain Olivieri (Retalianist) · PROVA DE CONCEITO Nº 7 · PESQUISA + FONTE ADQUIRIDAS (13/10/2026)
+## 🕺 Billie Jean — Michael Jackson · versão lírica de piano de Romain Olivieri (Retalianist) · PROVA DE CONCEITO Nº 7 · COMPLETA (MAPA HTML + 10 MIDIs + DOCX · validada de ouvido)
 
 **A PESQUISA (13/10/2026, desafio aceito e cumprido):** o vídeo do user
 (youtube.com/watch?v=BE-ru_9fpqU, 06/06/2013, 7:09) é "Michael Jackson - Billie Jean
@@ -396,8 +401,39 @@ inteira no espelho. **SONDA:** `saidas/sonda-reconstrucao-pdf.mid` (939+751 nota
 vídeo. (Bônus: descobriu-se e corrigiu-se um bug de 4 bytes por trilha no
 `escreve_midi` — fim-de-trilha fora do comprimento declarado do chunk.)
 
-**PRÓXIMO PASSO:** user ouve a sonda contra o vídeo → fábrica do Mapa Musical (HTML/MIDI/
-DOCX no padrão das PoCs), com a IA como contraprova de execução (rubato/durações reais).
+**PRÓXIMO PASSO: user ouve a sonda contra o vídeo → fábrica do Mapa Musical (HTML/MIDI/
+DOCX no padrão das PoCs), com a IA como contraprova de execução (rubato/durações reais).**
+
+**VALIDAÇÃO DE OUVIDO (13/10/2026) ✓:** o user ouviu a sonda contra o vídeo e
+confirmou: *"Tudo conferido e confirmado... TÁ TUDO CERTO !!!"* — ordem dada: em frente
+com o Mapa Musical Parceiro.
+
+**O MAPA MUSICAL (13/10/2026) — FÁBRICA COMPLETA:** `trabalho/gera_billie_jean.py` +
+`trabalho/gera_billie_jean_docx.py` (registradas no `ferramentas/regenera-tudo.sh` —
+agora **14 fábricas, todas verdes**). Saídas em `07-billie-jean-retalianist/saidas/`:
+
+- **`mapa-musical-billie-jean.html`** — o mapa: a ideia em 1 minuto (o groove do pop
+  desacelerado à metade, ♩=75 vs ~115 do disco, mesmo tom Fá#m); a assinatura (riff
+  Fá#4·Dó#4·Mi4·Fá#4 | Mi4·Dó#4·Si3·Dó#4 = 4 notas, a escala de Fá#m numa mão); teclado-
+  guia com moradas (Fá#4 ×186, Dó#4 ×167, Fá#3 ×134) + teto Fá#5 (c105) + porão G#1
+  (c52); **a "rua da assinatura"** — timeline SVG com as **30 aparições do riff**
+  (D 22× · E 8×, incl. m16 com oitava dobrada — capturada por pitch-class): nasce no
+  agudo (INTRO), emigra pro grave (A), relâmpago (C), porão (D), explode ×12 seguidas
+  na campeã F (c77–91); a cama (carrossel Fá#m→Mi→Ré com o Si de virada — inversões na
+  seção F = o baixo caminhante do original em câmera lenta); a jornada pelas 9 seções
+  (INTRO · A–H, tabela compasso↔sistema autoritativa); os momentos raros (família Mi♯
+  c12·23·33·50·62 + o único Fá natural c23 · fusas em oitonas c93–99 · compassos de 1
+  tempo c14/c39 · respirações c14–15/c39/c92); o diálogo das mãos; transparência; guia
+  de montagem.
+- **`mapa-musical-billie-jean.docx`** — a versão imprimível (teclado PNG embutido,
+  3 tabelas, 61 parágrafos).
+- **`teclado-billie.png`** — teclado-guia (G#1–F#5, contagens por tecla).
+- **10 MIDIs** — `a-assinatura.mid` (o loop de treino: c1–4 reais ×4 voltas — riff +
+  cama Fá#m–Mi–Ré–Si) + 9 de estudo `estudo-{esquerda,direita,juntas}-{55,65,75}.mid`
+  (esquerda 751 · direita 939 · juntas 1690 notas = a sonda validada, em três
+  andamentos). Todos revalidados com `midi_parse` (fim 112,5c / a-assinatura 16,0c ✓).
+  *(Bug pego e corrigido na fábrica: o loop da assinatura empilhava m1–m4 no tempo 0
+  de cada volta — faltava o offset do compasso; os 9 estudos nasceram certos.)*
 
 ---
 

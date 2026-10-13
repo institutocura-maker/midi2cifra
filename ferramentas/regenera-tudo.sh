@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenera TODAS as saídas (12 fábricas → 7 HTMLs + 6 DOCXs + 26 MIDIs + 5 PNGs) a partir das fábricas.
+# Regenera TODAS as saídas (14 fábricas → 8 HTMLs + 7 DOCXs + 36 MIDIs + 6 PNGs) a partir das fábricas.
 # Uso (de qualquer lugar): bash ferramentas/regenera-tudo.sh
 set -u
 cd "$(dirname "$0")/.."
@@ -15,7 +15,9 @@ for f in 01-november-rain/trabalho/gera_mapa.py \
          05-river-flows-in-you/trabalho/gera_river.py \
          05-river-flows-in-you/trabalho/gera_river_docx.py \
          06-forest-corciolli/trabalho/gera_forest.py \
-         06-forest-corciolli/trabalho/gera_forest_docx.py; do
+         06-forest-corciolli/trabalho/gera_forest_docx.py \
+         07-billie-jean-retalianist/trabalho/gera_billie_jean.py \
+         07-billie-jean-retalianist/trabalho/gera_billie_jean_docx.py; do
   printf '%s ' "$f"
   if python3 "$f" > /dev/null 2>&1; then echo '✓'; else echo '✗ FALHOU (rodar manualmente p/ ver o erro)'; fail=1; fi
 done
